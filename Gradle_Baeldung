@@ -1,0 +1,73 @@
+
+-----------------##Gradle------------------------------
+
+Gradle consist of one or more projects and each project consists of one or more tasks
+
+#A project in Gradle can be assembling a Jar, war or even a .zip file
+
+########Task and Behaviours
+
+A task is nothing but a small piece of code and Behaviour aims to enhance it with some additional Behaviors.
+
+-#Task
+task helloGradle{
+    doLast{
+    println 'Hello Gradle'
+  }
+}
+
+task fromBaeldung (dependsOn: helloGradle) {
+  doLast{
+     println "I'm from Baeldung"
+  }
+}
+
+task helloBaeldung {
+  doLast{
+    println 'It wil be executed second'
+    }
+  }
+
+
+##########Plugins
+There are two types of Plugins in Gradle - script and Binary
+
+To benefit from additional functionality, every plugin needs to go through two phases: resolving and applying
+
+-#Resolving
+Resolving means finding the correct versions of the plugin jars and adding to the classpath of the project.
+
+-#Applying
+Applying means plugins is executing Plugin.apply(T) on the project.
+
+#Applying Script Plugin
+
+task fromPlugin {
+   dolast{
+     println "I'm from plugin"
+     }
+   }
+
+#Applying Binary Plugins using Plugin DSL
+
+  plugins{
+    id 'application'
+    }
+
+
+ #--------------------------Dependency Mangement----------------
+
+ Gradle supports a very flexible dependency mangement systems.
+ Best practices for dependency management in Gradle are versioning, dynamic versioning, resolving version
+  conflicts, and managing transitive dependencies.
+
+
+#Declaring Dependencies
+ dependencies {
+    implementation group:
+      'org.springframework',name: 'spring-core',version: '4.3.5.RELEASE'],
+    implementation 'org.springframework:spring-core:4.3.5.RELEASE'],
+    [group: 'org.spring.framework:spring-aop:4.3.5.RELEASE'
+
+}
+
