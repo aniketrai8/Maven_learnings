@@ -5,7 +5,8 @@ Dependency Resolution
 Build Generation
 Documentation
 
-POM _ Project object Model
+
+##POM _ Project object Model
 It helps to organize and manage software development process
 
 As the project progresses sometimes you need to update the dependencies which we dont need to do manually it can be
@@ -56,5 +57,25 @@ are severlets.api and p.api
 Runtime Dependencies -> Runtime dependenciesa are provided as their name suggests and are kept outside the JAR
 files
 
+
+
 Test Dependencies -> Are required at the time of Test
+
+
+----------------------------------------------------- #GRADLE --------------------------------------------------
+
+Gradle basic needs is that there are number of parts of developing a full scale Java project to be delievered to the client, it involves
+
+*Devloping Source Code
+*Compiling the code
+* Adding libraries/jar files to the classpath
+* Creating Projects standard directories
+Generating documents
+* Building Jar/War files
+* Unit Testing
+* Deployment
+
+So any of this might brake at any point and that might lead to causing an error delay in delivvering the project to the client in order to reduce time and projetc
+Dependencies mangement and lifecyle issuses
+A BUILD automation tool like Gradle was introduced, to manage the effectively the entire cycle and speed up the whlole process and Automate the same.
 
