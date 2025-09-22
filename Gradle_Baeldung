@@ -1,20 +1,20 @@
-
------------------##Gradle------------------------------
+#Gradle
 
 Gradle consist of one or more projects and each project consists of one or more tasks
 
-#A project in Gradle can be assembling a Jar, war or even a .zip file
+### A project in Gradle can be assembling a Jar, war or even a .zip file
 
 ########Task and Behaviours
 
 A task is nothing but a small piece of code and Behaviour aims to enhance it with some additional Behaviors.
 
--#Task
+```Task
 task helloGradle{
     doLast{
     println 'Hello Gradle'
   }
 }
+```
 
 task fromBaeldung (dependsOn: helloGradle) {
   doLast{
