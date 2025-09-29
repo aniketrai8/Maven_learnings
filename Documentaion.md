@@ -21,8 +21,8 @@ Popular Features of Maven ->
 > Seamless Integration with IDE</br>
 
 ## Annotation in Maven ->
- - <Dependency>
- - <plugin>
+ - Dependency
+ - plugin
  - compile, test, package
  
 
