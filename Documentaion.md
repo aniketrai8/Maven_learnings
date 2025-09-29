@@ -20,6 +20,12 @@ Popular Features of Maven ->
 > Consistent build</br>
 > Seamless Integration with IDE</br>
 
+## Annotation in Maven ->
+ - <Dependency>
+ - <plugin>
+ - compile, test, package
+ 
+
 
 
 ## Maven Default Lifecycle
@@ -103,6 +109,41 @@ files
 * Unit Testing
 * Deployment
 
+  -----------------------------
+  
 <I>So any of this might brake at any point and that might lead to causing an error delay in delivvering the project to the client in order to reduce time and projet<I>
 Dependencies mangement and lifecyle issuses
 A <b>BUILD</b> automation tool like Gradle was introduced, to manage the effectively the entire cycle and speed up the whlole process and Automate the same.
+
+# Mockitwo
+
+  Mockitwo is used for Unit Testing it major feathure inlcude
+  * Creating Mock objects to simulate the behaviour of Dependencies
+  * It helps isolate the class under test so it can indepependenttly tested
+  * The real objective is to replace the real objects during the Tests.
+
+### Annotation
+* Mock -> Creates a mock object
+* InjectMocks -> Creates an Object and injects mocks into it
+* @Spy -> Wraps a real object and lets you stub some methods
+* @ Captor -> Captures argument passed to a mocked method
+
+  ```
+  public class UserServiceTest {
+  @Mock
+  private UserRepository repo;
+
+  @InjectMocks
+  private UserService service;
+
+  @Test
+  public void testGetUser(){
+   when (repo.findById(1)).thenReturn(new User(1,"John"));
+  assertEquals("John", user.getName());
+  }
+  }
+  ```
+  * Stubbing -> Telling a mock what to return when a method is called.
+  * Verification -> Checking that a method was called.
+ 
+    
