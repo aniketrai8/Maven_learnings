@@ -1,0 +1,11 @@
+tasks.register('sayHii'){
+    doLast {
+        println 'Hello this is ran through Script Plugin'
+    }
+}
+
+tasks.register('sayGoodBye'){
+    doLast {
+        println 'GoodBye, from Script Plugin'
+    }
+}

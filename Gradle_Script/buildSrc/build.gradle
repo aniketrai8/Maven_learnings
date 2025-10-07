@@ -1,0 +1,16 @@
+plugins {
+    id 'java-gradle-plugin'
+}
+
+repositories {
+    mavenCentral()
+}
+
+gradlePlugin {
+    plugins {
+        greetingPlugin {
+            id = 'com.example.greeting'
+            implementationClass = 'com.example.greeting.GreetingPlugin'
+        }
+    }
+}
