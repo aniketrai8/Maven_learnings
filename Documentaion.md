@@ -97,7 +97,11 @@ files
  -------------------------------------------------------------------------------------------------
 
  # GRADLE
-
+* Gradle is  a Groovy based build mangement tool deisgned specically for Java Based Project.
+<I> What is a Gradle do </I> ?
+  - A project in gradle can be assembling a jar,war or even .zip file.
+<I> What is a task in Gradle </I> ?
+ - A Task is a single peice of work. This can include compiling classes or creating and publishing Java/Web archives.
 ### Gradle basic needs is that there are number of parts of developing a full scale Java project to be delievered to the client, it involves
 
 * Devloping Source Code
@@ -112,8 +116,119 @@ files
   -----------------------------
   
 <I>So any of this might brake at any point and that might lead to causing an error delay in delivvering the project to the client in order to reduce time and projet<I>
-Dependencies mangement and lifecyle issuses
+
+## <ins>Tasks</ins>
+```
+ task toLower {
+   doLast {
+    String someString =' hello from Baeludnung'
+    println "Original: "+ someString
+        println "Lower case: " + someString.toLowerCase()
+    }
+}
+```
+<I> Adding Behaviour to a Task </I>
+```
+task helloAniket {
+  doLast {
+   println 'I will be executed second '
+}
+
+helloAniket.doFirst {
+   println 'I will be executed first '
+}
+helloAniket.doLast {
+   println 'I will be executed third'
+}
+
+helloAniket {
+doLast {
+   println 'I will be executed fourth'
+}
+```
+
+<B>  <ins> Plugins</ins> </B>
+<i> Plugins are a resuable peiece of build logic that adds tasks,conventions or confriguation to your project, so instead of repeating build code again and again you package it as a Plugin. </I>
+* There are two tupes of plugins in Gradle - <I>script and binary</I>
+* To beneift from adding additional functionality, every plugins needs to go through both <ins>resolving and applying</ins>.
+ > Resolving - Resolving means finding the correct verions of the plugin jar and adding to the classpath of the project.
+ > Applying Plugins - Applying plugins means executing Plugin.apply(T) on the project.
+```
+task fromPlugin {
+  doLast {
+     println "I'm from plugin"
+   }
+}
+
+To Apply
+apply from: 'aplugin.gradle'
+
+```
+<b> Script Plugin </b>
+* These are .gradle files that you can include into another build script.
+  ```
+  repositories {
+     mavenCentral() {
+  }
+
+  dependencies {
+     testImplementation 'junit:junit:4.13.2'
+  }
+
+  //build.gradle
+  apply from 'common.gradle'
+  ```
+<b>Binary Plugins</b> ->
+* Should be declared at the top of build.gradle file before you declare repositories and dependencies.
+* Plugin DSL <b>cannot</b> be used at the <I>gradle.init, setting.gradle</I> as these are processed at a different stage of the Gradle    Lifecycle, the plugins DSL is avaliable at the project level (only can be written in build.gradle pr build.gradle.kts) and it is not avaliable  at the build setup or intialization phase.
+* Binary Plugin is only added in .class or .jar file
+* <ins> These are proper compiled plugins - written in Java(etc) as .jar files
+```
+package com.example
+
+import org.gradle.Plugin;
+import org.gradle.api.Project;
+
+public class MyPlugin implements Plugins<Project> {
+@Override
+public void apply (Project project) {
+  proejct.task("helloPlugin").doLast(taslk-> {
+    System.out.println("Hello from my Binary Plugin");
+  });
+}
+}
+
+plugins {
+   id 'com.example.myplugin' version '1.0'
+} 
+
+```
+<ins> Custom Tasks </ins>
+* Cutoms tasks are the ones where simply you define your own specific action.
+* Cutoms Tasks can -
+  > Run Shell Commands
+  > Process Files
+  > Generate Code
+  > Deploy artificats
+* Examples of Cutom tasks include <ins>@doLast</ins>, <ins>@doFirst</ins>, <ins>@dependsOn</ins> , <ins>@TaskAction</ins>
+  ```
+  tasks.register('taskName') {
+   group = 'Custom'
+  description = 'Does an Activity"
+  dependsOn = ' otherTask'
+
+  doFirst {
+    println ' Runs before the main action'
+  }
+  doLast {
+    println 'Runs in the end'
+  }
+  }
+  ```
+### <ins>Dependencies mangement and lifecyle issuses</ins>
 A <b>BUILD</b> automation tool like Gradle was introduced, to manage the effectively the entire cycle and speed up the whlole process and Automate the same.
+
+
 
 # Mockitwo
 
