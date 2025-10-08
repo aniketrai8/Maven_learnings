@@ -147,6 +147,12 @@ doLast {
 }
 ```
 
+### <ins>Build Lifecycle</ins> ->
+* The Build LifeCycle suggests how Gradle Sharply manages a smooth operations withtin a big project.
+* Gradle first figures out which projects are a part of the build, these are mentioned inside the build.gradle file
+* <ins>In Configuration Phase </ins> - All project objects that were required instances are configured, this helps saving time this is called Incubating
+* <ins> Execution Phase </ins> - Finally on demand, the Gradle executes tasks
+
 <B>  <ins> Plugins</ins> </B>
 <i> Plugins are a resuable peiece of build logic that adds tasks,conventions or confriguation to your project, so instead of repeating build code again and again you package it as a Plugin. </I>
 * There are two tupes of plugins in Gradle - <I>script and binary</I>
@@ -239,9 +245,32 @@ A <b>BUILD</b> automation tool like Gradle was introduced, to manage the effecti
 
 ### Annotation
 * Mock -> Creates a mock object
+  <ins>Mock</ins>
+   - Mock is a specialized object that records interaction and allows for verification of method calls, arguments, and the order of the calls.
+   - Mock are designed to simulate behaviour but also to verify the interaction between the object and its dependencies.
+ 
+ ```
+   @Mock
+   private Http http; ## the http field is a mock of the Http interface
+
+   @InjectMocks private AddressRetriever retriever; ## The retriever field is the instance under test. Mockitwo will automatically inject the http mock into it.
+   @Test
+   public void testRetrieverAddress() {
+   String url = "http://example.com/addresss?=38.0000&lon=104.000";
+   Mockitwo.when(http.get(url).thenReturn("{\address\":{...}.}");
+   retriever.retrieveAddress(38.0,-104.0);
+   Mockitwo.verify(http).get(Url);  
+   }
+
+ ```
+   - Mocks are objects that simulate the behaviour of real objects , and they allow you to control and verify the interaction between the system under test.
+     > Using Mockitwo in Tests:
+      - @Mock - Creates a Mock instances of the specified class or interface
+      - @InjectMocks - Automatically injects the mock dependencies into the class under the test.
+      - MockitwoAnnotation.initMocks(this) - Intializes the mocks annotated with @Mock and injects them into the class under test.
 * InjectMocks -> Creates an Object and injects mocks into it
-* @Spy -> Wraps a real object and lets you stub some methods
-* @ Captor -> Captures argument passed to a mocked method
+* @Spy -> Creates a partial mock that delegates calls to the real object unless specifically statted.
+* @ ArgumentCaptor -> Mockitwo allows you to capture argument passed to mocks method during interaction.This is can be useful for verifying the argument to a method.
 
   ```
   public class UserServiceTest {
@@ -259,6 +288,17 @@ A <b>BUILD</b> automation tool like Gradle was introduced, to manage the effecti
   }
   ```
   * Stubbing -> Telling a mock what to return when a method is called.
-  * Verification -> Checking that a method was called.
- 
+    - A Stub is a simplified hard coded implementation to isolate and Test parts of the System. It mainly used to test it with external sources like HTTP or Database Query, without testing the methods or arguments passed into it. 
+  * Verification -> Checking that a method was called. While Stubbig we dint really care  about mehtods calls or interactions.
+  * 
+ * <I><ins> Mock vs Spy </ins></I> ->
+   - <I>Mock </I> : A full dummy implemeneattion. No real methods are called unless explicityly configured.
+      - All Methods return default values(null fit objects, 0 for integers)
+  * <I> Spy </I> : A Partial mock that wraps an existing instance and allows you to control specidfic methods while keeping real behaviour for others.
+
+     ```
+     Counter counter = Mockitwo.spy(new Counter());
+     Mockitwo.when(counter.increament()).thenReturn(100);
+     System.out.println(counter.increament());
+     ```
     
