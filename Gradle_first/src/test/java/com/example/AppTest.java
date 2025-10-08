@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 
-public class AppTest
-{
-   void TestMsg(){
+public class AppTest {
+   @Test
+   void testMsg(){
        String msg="Hello, Gradle basic setup";
        assertEquals("Hello, Gradle basic setup",msg);
    }

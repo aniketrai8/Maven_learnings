@@ -1,5 +1,6 @@
 plugins {
-    java
+    id("java")
+    id("application")
 }
 
 group = "com.example"
@@ -20,4 +21,8 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform() // Enables JUnit 5
+}
+
+application {
+    mainClass.set("com.example.App")  // Kotlin DSL uses .set() for properties
 }

@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('helloGradle') {
+    doLast {
+        println 'Gradle Basic dependsOn task!'
+    }
+}
+
+tasks.register('fromTutorial') {
+    dependsOn('helloGradle')
+    doLast {
+        println "I'm Aniket"
+    }
+}
+
+tasks.register ('toLower') {
+    doLast {
+        String text = 'Java is an Object Oriented Language'
+        println "Original " + text
+        println "LowerCase "+text.toLowerCase()
+    }
+}
